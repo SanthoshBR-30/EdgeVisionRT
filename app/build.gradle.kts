@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.edgevisionrt"
-    compileSdk = 34
+    compileSdk = 35
 
     externalNativeBuild {
         cmake {
@@ -44,7 +44,22 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    externalNativeBuild {
+        cmake {
+            path = file("CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
+
+    // Add this: Copy OpenCV native libraries to jniLibs
+    sourceSets {
+        getByName("main") {
+            jniLibs.srcDirs("../opencv/native/libs")
+        }
+    }
 }
+
 
 dependencies {
 
