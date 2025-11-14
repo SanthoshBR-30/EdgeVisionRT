@@ -4,7 +4,8 @@ project("edgevisionrt")
 
 # Add the native library with correct path
 add_library(edgevisionrt SHARED
-        src/main/cpp/native-lib.cpp)
+        src/main/cpp/native-lib.cpp
+        src/main/cpp/opencv_processor.cpp)
 
 # Find and link log library
 find_library(log-lib log)
