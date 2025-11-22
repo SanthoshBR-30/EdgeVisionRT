@@ -1,4 +1,4 @@
- # 🎥 EdgeVisionRT - Real-Time Edge Detection Viewer
+ #  EdgeVisionRT - Real-Time Edge Detection Viewer
 
 Android app with native C++ edge detection, OpenGL ES 2.0 rendering, and TypeScript web viewer.
 
@@ -6,29 +6,29 @@ Android app with native C++ edge detection, OpenGL ES 2.0 rendering, and TypeScr
 ## ✅ Features Implemented (Android & Web)
 
 ### Android Features
-- ✅ **Camera2 API integration** - Real-time camera feed capture
-- ✅ **Native C++ edge detection** - Custom Sobel filter via JNI/NDK
-- ✅ **OpenGL ES 2.0 rendering** - Hardware-accelerated display with shaders
-- ✅ **Toggle functionality** - Switch between raw camera feed and edge-detected output
-- ✅ **FPS counter** - Real-time performance metrics (15-20 FPS)
-- ✅ **Processing time display** - Shows ~20ms per frame
-- ✅ **Portrait mode optimization** - Correct camera orientation
-- ✅ **Lifecycle management** - Proper pause/resume handling
+-  **Camera2 API integration** - Real-time camera feed capture
+-  **Native C++ edge detection** - Custom Sobel filter via JNI/NDK
+-  **OpenGL ES 2.0 rendering** - Hardware-accelerated display with shaders
+-  **Toggle functionality** - Switch between raw camera feed and edge-detected output
+-  **FPS counter** - Real-time performance metrics (15-20 FPS)
+-  **Processing time display** - Shows ~20ms per frame
+-  **Portrait mode optimization** - Correct camera orientation
+-  **Lifecycle management** - Proper pause/resume handling
 
 ### Web Features
-- ✅ **TypeScript implementation** - Fully typed, modular code
-- ✅ **Side-by-side comparison** - Raw frame vs edge-detected frame
-- ✅ **Frame statistics display** - Resolution, FPS, processing algorithm
-- ✅ **Static frame viewer** - Displays pre-captured processed frames
+-  **TypeScript implementation** - Fully typed, modular code
+-  **Side-by-side comparison** - Raw frame vs edge-detected frame
+-  **Frame statistics display** - Resolution, FPS, processing algorithm
+-  **Static frame viewer** - Displays pre-captured processed frames
 
 
 ### 📷 Screenshots & GIF
 ## Screenshot
-https://github.com/user-attachments/assets/1b69affc-c3a2-4784-b42b-77670020bd8b
-https://github.com/user-attachments/assets/a1ddd3c2-a8a6-4b37-ac9d-60706e665847
+https://github.com/user-attachments/assets/1b69affc-c3a2-4784-b42b-77670020bd8b <br>
+https://github.com/user-attachments/assets/a1ddd3c2-a8a6-4b37-ac9d-60706e665847 <br> 
 
 ## GIF
-https://github.com/user-attachments/assets/07534372-9a8f-412e-8cd0-ce521083a00a
+https://github.com/user-attachments/assets/07534372-9a8f-412e-8cd0-ce521083a00a <br>
 
 ### Android App
 
@@ -50,9 +50,9 @@ https://github.com/user-attachments/assets/07534372-9a8f-412e-8cd0-ce521083a00a
 
 ### Web Viewer
 
-**Layout:**
--https://github.com/user-attachments/assets/ea87d51e-8982-4bf7-8292-9bbd9ac6920b
--https://github.com/user-attachments/assets/da76dd61-bae1-499c-91ae-754e71a547a6
+**Layout:** <br>
+https://github.com/user-attachments/assets/ea87d51e-8982-4bf7-8292-9bbd9ac6920b <br>
+https://github.com/user-attachments/assets/da76dd61-bae1-499c-91ae-754e71a547a6 <br>
 
 
 ## ⚙ Setup Instructions
@@ -141,7 +141,7 @@ target_link_libraries(edgevisionrt
 ---
 
 ### Architecture
-Camera2 → Kotlin → JNI → C++ Sobel Edge Detection → OpenGL ES Renderer → Display on Android
+Camera2 → Kotlin → JNI → C++ Edge Detection → OpenGL ES Renderer → Display on Android
 
 TypeScript Viewer:
 Static raw_frame.jpg + edge_frame.jpg → DOM → Stats Overlay
