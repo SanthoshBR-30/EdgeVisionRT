@@ -1,3 +1,4 @@
+
 package com.example.edgevisionrt.camera
 
 import android.Manifest
@@ -5,7 +6,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.ImageFormat
-import android.graphics.SurfaceTexture
 import android.hardware.camera2.*
 import android.media.ImageReader
 import android.os.Handler
@@ -27,6 +27,7 @@ class CameraManager(private val context: Context) {
     private var imageReader: ImageReader? = null
     private var backgroundHandler: Handler? = null
     private var backgroundThread: HandlerThread? = null
+    private var sensorOrientation: Int = 0
 
     var onFrameAvailable: ((ImageReader) -> Unit)? = null
 
@@ -80,7 +81,12 @@ class CameraManager(private val context: Context) {
         val manager = context.getSystemService(Context.CAMERA_SERVICE) as android.hardware.camera2.CameraManager
         try {
             val cameraId = manager.cameraIdList[0] // Use back camera
-            Log.d(TAG, "Opening camera: $cameraId")
+
+            // Get sensor orientation
+            val characteristics = manager.getCameraCharacteristics(cameraId)
+            sensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION) ?: 0
+
+            Log.d(TAG, "Opening camera: $cameraId, sensor orientation: $sensorOrientation")
             manager.openCamera(cameraId, stateCallback, backgroundHandler)
         } catch (e: CameraAccessException) {
             Log.e(TAG, "Failed to open camera: ${e.message}")
@@ -106,6 +112,9 @@ class CameraManager(private val context: Context) {
                 CameraDevice.TEMPLATE_PREVIEW
             )?.apply {
                 addTarget(surface)
+
+                // Set rotation based on sensor orientation
+                set(CaptureRequest.JPEG_ORIENTATION, getJpegOrientation())
             }
 
             cameraDevice?.createCaptureSession(
@@ -134,6 +143,18 @@ class CameraManager(private val context: Context) {
             )
         } catch (e: CameraAccessException) {
             Log.e(TAG, "Failed to create capture session: ${e.message}")
+        }
+    }
+
+    private fun getJpegOrientation(): Int {
+        // For portrait mode, we need to rotate based on sensor orientation
+        // Most back cameras have sensor orientation of 90 degrees
+        return when (sensorOrientation) {
+            0 -> 0
+            90 -> 0    // Back camera in portrait
+            180 -> 180
+            270 -> 180 // Front camera in portrait
+            else -> 0
         }
     }
 

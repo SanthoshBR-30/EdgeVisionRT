@@ -1,76 +1,50 @@
-// EdgeVisionRT Web Viewer
-// Displays processed frames from Android app
 
-interface FrameStats {
-    resolution: string;
-    fps: number;
-    processing: string;
-}
 
 class FrameViewer {
-    private frameElement: HTMLImageElement;
-    private resolutionElement: HTMLElement;
-    private fpsElement: HTMLElement;
-    private statusElement: HTMLElement;
+    private rawFrameElement: HTMLImageElement;
+    private edgeFrameElement: HTMLImageElement;
 
     constructor() {
-        this.frameElement = document.getElementById('frame-display') as HTMLImageElement;
-        this.resolutionElement = document.getElementById('resolution') as HTMLElement;
-        this.fpsElement = document.getElementById('fps') as HTMLElement;
-        this.statusElement = document.getElementById('status') as HTMLElement;
+        this.rawFrameElement = document.getElementById('raw-display') as HTMLImageElement;
+        this.edgeFrameElement = document.getElementById('edge-display') as HTMLImageElement;
 
         this.initialize();
     }
 
     private initialize(): void {
         console.log('EdgeVisionRT Web Viewer initialized');
-        this.updateStatus('Waiting for frame data...');
+        console.log('Timestamp:', new Date().toISOString());
 
-        // Load sample processed frame (placeholder for now)
-        this.loadSampleFrame();
-    }
+        // Log when images load
+        this.rawFrameElement.onload = () => {
+            console.log('Raw frame loaded successfully');
+        };
 
-    private loadSampleFrame(): void {
-        // Placeholder: Gray rectangle representing processed frame
-        // In real implementation, this will receive base64 image from Android
-        const canvas = document.createElement('canvas');
-        canvas.width = 640;
-        canvas.height = 480;
-        const ctx = canvas.getContext('2d');
+        this.edgeFrameElement.onload = () => {
+            console.log('Edge frame loaded successfully');
+        };
 
-        if (ctx) {
-            // Draw placeholder
-            ctx.fillStyle = '#333';
-            ctx.fillRect(0, 0, 640, 480);
-            ctx.fillStyle = '#fff';
-            ctx.font = '24px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Processed Frame Placeholder', 320, 240);
+        this.rawFrameElement.onerror = () => {
+            console.warn('Raw frame not found: raw_frame.png');
+        };
 
-            this.frameElement.src = canvas.toDataURL();
-            this.updateStats({ resolution: '640x480', fps: 15, processing: 'Edge Detection' });
-            this.updateStatus('Sample frame loaded');
-        }
-    }
+        this.edgeFrameElement.onerror = () => {
+            console.warn('Edge frame not found: edge_frame.png');
+        };
 
-    public updateFrame(base64Image: string): void {
-        this.frameElement.src = base64Image;
-        this.updateStatus('Frame updated');
-    }
-
-    public updateStats(stats: FrameStats): void {
-        this.resolutionElement.textContent = stats.resolution;
-        this.fpsElement.textContent = stats.fps.toString();
-    }
-
-    private updateStatus(status: string): void {
-        this.statusElement.textContent = status;
-        console.log(`Status: ${status}`);
+        console.log('%c📸 EdgeVisionRT Web Viewer Ready', 'font-size: 16px; font-weight: bold; color: #667eea');
+        console.log('Waiting for images:');
+        console.log('  - raw_frame.png (Raw camera feed)');
+        console.log('  - edge_frame.png (Edge detection output)');
     }
 }
 
 // Initialize viewer when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     const viewer = new FrameViewer();
-    console.log('Web viewer ready');
+
+    // Expose viewer globally
+    (window as any).frameViewer = viewer;
+
+    console.log('Web viewer initialized and ready');
 });
