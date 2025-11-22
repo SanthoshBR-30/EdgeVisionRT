@@ -22,13 +22,13 @@ Android app with native C++ edge detection, OpenGL ES 2.0 rendering, and TypeScr
 - ✅ **Static frame viewer** - Displays pre-captured processed frames
 
 
-## 📷 Screenshots & GIF
-#Screenshot
--https://github.com/user-attachments/assets/1b69affc-c3a2-4784-b42b-77670020bd8b
--https://github.com/user-attachments/assets/a1ddd3c2-a8a6-4b37-ac9d-60706e665847
+### 📷 Screenshots & GIF
+## Screenshot
+https://github.com/user-attachments/assets/1b69affc-c3a2-4784-b42b-77670020bd8b
+https://github.com/user-attachments/assets/a1ddd3c2-a8a6-4b37-ac9d-60706e665847
 
-#GIF
--https://github.com/user-attachments/assets/07534372-9a8f-412e-8cd0-ce521083a00a
+## GIF
+https://github.com/user-attachments/assets/07534372-9a8f-412e-8cd0-ce521083a00a
 
 ### Android App
 
@@ -146,15 +146,16 @@ Camera2 → Kotlin → JNI → C++ Sobel Edge Detection → OpenGL ES Renderer �
 TypeScript Viewer:
 Static raw_frame.jpg + edge_frame.jpg → DOM → Stats Overlay
 
-** Native C++ flow **
--Receive RGBA bitmap
--Convert to grayscale
--Apply Sobel (Gx + Gy)
--Output edges as white on black
+**Native C++ Flow**
+- Receive RGBA bitmap  
+- Convert to grayscale  
+- Apply Sobel (Gx + Gy)  
+- Output edges as white on black  
 
-** OpenGL ES **
--Upload processed bitmap as texture
--Render full-screen quad with shaders
+**OpenGL ES**
+- Upload processed bitmap as texture  
+- Render full-screen quad with shaders  
+
 
 ## 🔗 Repository
 
